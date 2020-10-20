@@ -1,7 +1,7 @@
 {
   "functions": {
     "predeploy": [
-      "yarn --prefix \"$RESOURCE_DIR\" lint"
+      "cd \"$RESOURCE_DIR\" && yarn lint"
     ]
   }
 }
