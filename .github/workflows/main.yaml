@@ -12,12 +12,6 @@ jobs:
     # if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.11.0
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
