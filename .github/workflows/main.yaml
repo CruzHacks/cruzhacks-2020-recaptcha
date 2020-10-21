@@ -18,7 +18,7 @@ jobs:
       - name: Running linter
         run: |
             cd functions 
-            npm run lint:ci
+            npm run lint
   tests: 
     runs-on: ubuntu-latest
     steps: 
