@@ -7,18 +7,44 @@ on:
     branches: [ main ]
 
 jobs:
+  linter: 
+    runs-on: ubuntu-latest 
+    steps: 
+      - uses: actions/checkout@v2
+      - name: Install npm packages
+        run: |
+            cd functions
+            npm ci
+      - name: Running linter
+        run: |
+            cd functions 
+            npm run lint
+  tests: 
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
+      - name: Install npm packages
+        run: |
+            cd functions
+            npm ci 
+      - name: Executing Tests 
+        run: |
+            cd functions 
+            pwd 
+            echo "Executing tests go here"
   auto-deploy:
     runs-on: ubuntu-latest
-    # if: github.ref == 'refs/heads/main'
+    needs: [tests, linter]
+    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
       - name: Install npm packages
         run: |
             cd functions
-            npm install
+            npm ci
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only functions
+          args: deploy --only functions #TODO: specify function you want to deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
