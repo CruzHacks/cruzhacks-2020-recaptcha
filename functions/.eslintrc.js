@@ -2,10 +2,19 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2017,
   },
-  plugins: ["promise", "prettier"],
-  extends: ["eslint:recommended", "plugin:prettier/recommended"],
+  plugins: ["promise", "prettier", "jest"],
+  extends: ["eslint:recommended", "plugin:prettier/recommended", "plugin:jest/recommended"],
   rules: {
     "prettier/prettier": "error",
+
+    "no-unused-vars": [
+      "error",
+      {
+        args: "after-used",
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+      },
+    ],
 
     // Removed rule "disallow the use of undeclared variables unless mentioned in /*global */ comments" from recommended eslint rules
     "no-undef": "off",
