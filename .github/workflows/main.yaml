@@ -11,10 +11,14 @@ jobs:
     runs-on: ubuntu-latest 
     steps: 
       - uses: actions/checkout@v2
-      - name: Install npm packages
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.13.0
+      - name: Install Dependencies
         run: |
             cd functions
-            npm ci
+            yarn install --frozen-lockfile
       - name: Running linter
         run: |
             cd functions 
@@ -23,10 +27,14 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v2
-      - name: Install npm packages
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.13.0
+      - name: Install Dependencies
         run: |
             cd functions
-            npm ci 
+            yarn install --frozen-lockfile 
       - name: Executing Tests 
         run: |
             cd functions 
@@ -37,10 +45,14 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
-      - name: Install npm packages
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.13.0
+      - name: Install Dependencies
         run: |
             cd functions
-            npm ci
+            yarn install --frozen-lockfile
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
